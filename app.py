@@ -62,7 +62,11 @@ def get_song_album_cover_url(song_name):
 #         return 'https://i.postimg.cc/0QNxYz4V/socia1.%20.png'
 
 def recommend(song):
+    genre='Disco'
     index = music[music['song'] == song].index[0]
+    # gg=
+    # similarity=
+    # similarity= 
     distance= sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
     recommended_music_names = []
     recommended_music_posters = []
@@ -75,7 +79,21 @@ def recommend(song):
         print(recommended_music_names, recommended_music_posters)
     return recommended_music_names, recommended_music_posters
 
-
+def recommend(song):
+    genre='Disco'
+    index = music[music['song'] == song].index[0]
+    
+    distance= sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
+    recommended_music_names = []
+    recommended_music_posters = []
+    for i in distance[1:6]:
+        artist=music.iloc[i[0]].name
+        # print(artist)
+        # print(music.iloc[i[0]].song)
+        recommended_music_posters.append(get_song_album_cover_url(music.iloc[i[0]].song))
+        recommended_music_names.append(music.iloc[i[0]].song)
+        print(recommended_music_names, recommended_music_posters)
+    return recommended_music_names, recommended_music_posters
 
 # Other functions like recommend(), get_artist_songs(), and get_song_album_cover_url() remain unchanged
 
@@ -109,14 +127,16 @@ if song_name:
             # Get the artist's songs and cover images
             artist_songs = get_artist_songs(artist_id)
 
-            # Display artist's songs with cover images
+            
             st.subheader(f"Songs by the artist based on '{song_name}':")
             for song_info in artist_songs:
                 if song_info['song_name']:
                     st.markdown(f"Song Name: {song_info['song_name']}")
                 if song_info['song_cover']:
                     
-                    st.markdown(f"[![Album Cover]({song_info['song_cover']}]({song_info['spotify_uri']})")
+                    st.markdown(f"[![Album Cover]({song_info['song_cover']})]({song_info['spotify_uri']})")
+
+                    
                 else:
                     st.markdown(f"[![Album Cover]({song_info['song_cover']}]({'https://i.postimg.cc/0QNxYz4V/socia1.%20.png'})")
                 
