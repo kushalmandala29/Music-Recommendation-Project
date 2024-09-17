@@ -1,10 +1,14 @@
 import pickle
 import streamlit as st
+import os
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
-CLIENT_ID = "6ab005736a2e4aa5aa553948b7f89c5e"
-CLIENT_SECRET = "7b5fe373b10044488ccdd9256643191d"
+#Enter your client ID here
+CLIENT_ID= os.environ.get('DB_PASSWORD')
+
+#Enter your client secret here
+CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
 
 client_credentials_manager = SpotifyClientCredentials(client_id=CLIENT_ID, client_secret=CLIENT_SECRET)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
