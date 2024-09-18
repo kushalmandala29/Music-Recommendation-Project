@@ -4,8 +4,9 @@ import os
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
+
 #Enter your client ID here
-CLIENT_ID= os.environ.get('DB_PASSWORD')
+CLIENT_ID= os.environ.get('CLIENT_ID')
 
 #Enter your client secret here
 CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
@@ -150,3 +151,5 @@ if song_name:
        
     except Exception as e:
         st.error(f'Error: {e}')
+
+
